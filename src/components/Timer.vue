@@ -1,31 +1,16 @@
 <template>
   <li class="timer">
-    <label for="work-time">Work Time:</label>
-    <input v-model="workTime" />
-    <label for="break-time">Break Time:</label>
-    <input v-model="breakTime" />
+    <p>
+      Work time: {{ timerValue.workTime }}
+      Break time: {{ timerValue.breakTime }}
+    </p>
   </li>
 </template>
 
 <script>
 export default {
   name: 'Timer',
-  props: {
-    
-      },
-  methods: {
-    setTimer: {
-      function() {
-
-      },
-    },
-  },
-  data() {
-    return {
-      workTime: '',
-      breakTime: ''
-    }
-  }
+  props: [ 'timerValue' ],  
 }
 </script>
 
