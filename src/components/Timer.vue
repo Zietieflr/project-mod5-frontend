@@ -1,7 +1,9 @@
 <template>
-  <li class="timer">
+  <li class="timer-value">
     <p>
       Work time: {{ timerValue.workTime }}
+    </p>
+    <p>
       Break time: {{ timerValue.breakTime }}
     </p>
   </li>

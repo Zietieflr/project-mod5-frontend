@@ -1,13 +1,13 @@
 <template>
   <div class="timer-container">
     <ul>
-      <form v-on:submit.prevent>
-        <label for="work-timer-form">Work Time (minutes):</label>
-        <input v-model="workTimeForm" type="number" placeholder="Work Time (minutes)" />
-        <label for="break-timer-form">Break Time (minutes):</label>
-        <input v-model="breakTimeForm" type="number" placeholder="Break Time (minutes)" />
-        <label for="add-timer">Add timer</label>
-        <input type="submit" value="✚" @click="addTimerValue">
+      <form v-on:submit.prevent class="add-timers">
+        <label for="work-timer-Input" class="hidden">Work Time (minutes):</label>
+        <input v-model="workTimeInput" name="work-timer-Input" type="number" placeholder="Work Time (minutes)" />
+        <label for="break-timer-Input" class="hidden">Break Time (minutes):</label>
+        <input v-model="breakTimeInput" name="break-timer-Input" type="number" placeholder="Break Time (minutes)" />
+        <label for="add-timer" class="hidden">Add timer</label>
+        <input type="submit" name="add-timer" value="✚" @click="addTimerValue">
       </form>
       <CompletedTimer v-for="(completedTimerValue, index) in completedTimerValues" :key="index" :completedTimerValue="completedTimerValue" />
       <Timer v-for="(timerValue, index) in timerValues" :key="index" :timerValue="timerValue" />
@@ -28,8 +28,8 @@ export default {
   },
   data() {
     return {
-      workTimeForm: '',
-      breakTimeForm: '',
+      workTimeInput: '',
+      breakTimeInput: '',
       timerValues: [],
       completedTimerValues: [],
     }
@@ -37,8 +37,8 @@ export default {
   methods: {
     addTimerValue: function() {
       const newTimerValue = { 
-        workTime: this.workTimeForm, 
-        breakTime: this.breakTimeForm
+        workTime: this.workTimeInput, 
+        breakTime: this.breakTimeInput
       }
       this.timerValues.push(newTimerValue)
     },
