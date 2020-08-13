@@ -7,11 +7,15 @@
         <label for="break-timer-Input" class="hidden">Break Time (minutes):</label>
         <input v-model="breakTimeInput" name="break-timer-Input" type="number" placeholder="Break Time (minutes)" />
         <label for="add-timer" class="hidden">Add timer</label>
-        <input type="submit" name="add-timer" value="✚" @click="addTimerValue">
+        <a name="add-timer" @click="addTimerValue"><font-awesome-icon icon="plus" /></a>
+        <label for="start-timers" class="hidden">Start Timers</label>
+        <a name="start-timers" @click="startOnClick"><font-awesome-icon icon="play" /></a>
+        <label for="clear-all" class="hidden">Clear All</label>
+        <a name="clear-all" @click="clearTimerValues"><font-awesome-icon icon="trash-alt" /></a>
       </form>
-      <CompletedTimer v-for="(completedTimerValue, index) in completedTimerValues" :key="index" :completedTimerValue="completedTimerValue" />
-      <Timer v-for="(timerValue, index) in timerValues" :key="index" :timerValue="timerValue" />
-      <button @click="completedTimer" >Completed Timer</button>
+      <CompletedTimer v-for="(completedTimerValue, index) in completedTimerValues" :key="index + 'ctv'" :completedTimerValue="completedTimerValue" />
+      <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
+      <button @click="completedTimer" >Start Timers!</button>
     </ul>
   </div>
 </template>
@@ -19,6 +23,7 @@
 <script>
 import Timer from './Timer'
 import CompletedTimer from './CompletedTimer'
+import { startTimer } from '../utilityFunctions/timer'
 
 export default {
   name: 'TimerContainer',
@@ -32,6 +37,7 @@ export default {
       breakTimeInput: '',
       timerValues: [],
       completedTimerValues: [],
+      canStart: false,
     }
   },
   methods: {
@@ -45,6 +51,13 @@ export default {
     completedTimer: function() {
       const completedTimerValue = this.timerValues.shift()
       this.completedTimerValues.push(completedTimerValue)
+    },
+    startOnClick: function() {
+      startTimer(this.timerValues[0], this.completedTimer)
+    },
+    clearTimerValues: function() {
+      this.timerValues = []
+      this.completedTimerValues = []
     }
   }
 }
