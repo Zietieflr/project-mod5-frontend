@@ -25,15 +25,15 @@ import CompletedTimer from './CompletedTimer'
 import { startTimer } from '../utilityFunctions/timer'
 
 export default {
-  name: 'TimerContainer',
+  name: "TimerContainer",
   components: {
     Timer,
     CompletedTimer
   },
   data() {
     return {
-      workTimeInput: '',
-      breakTimeInput: '',
+      workTimeInput: "",
+      breakTimeInput: "",
       timerValues: [],
       completedTimerValues: [],
       canStart: false,
@@ -56,22 +56,30 @@ export default {
         this.timerValues[0], 
         this.completedTimer,
         this.workTimerSystemNotification,
-        this.breakTimerSystemNotification,  
+        this.breakTimerSystemNotification,
       )
     },
     clearTimerValues: function() {
       this.timerValues = []
       this.completedTimerValues = []
     },
-    workTimerSystemNotification: function() {
-      this.$notification.show('Stop working!', {
-        body: 'Your break is just a click away!'
+    workTimerSystemNotification() {
+      this.$notification.show("Stop working!", {
+        body: "Your break is just a click away!"
       }, {})
+      this.workTimerPageNotification()
     },
-    breakTimerSystemNotification: function() {
+    workTimerPageNotification() {
+      this.$swal("Work over!")
+    },
+    breakTimerSystemNotification() {
       this.$notification.show("Let's get back to it!", {
-        body: 'Your focus window is just a click away!'
+        body: "Your focus window is just a click away!"
       }, {})
+      this.breakTimerPageNotification()
+    },
+    breakTimerPageNotification() {
+      this.$swal("Break over!")
     }
   }
 }

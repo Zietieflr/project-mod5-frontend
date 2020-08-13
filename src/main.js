@@ -4,14 +4,12 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlay, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueNativeNotification from 'vue-native-notification'
+import VueSwal from 'vue-swal'
+
 
 library.add(faPlay, faPlus, faTrashAlt)
-
-Vue.use(VueNativeNotification, {
-  // Automatic permission request before
-    // showing notification (default: true)
-    requestOnNotify: true
-  })
+Vue.use(VueNativeNotification, {requestOnNotify: true})
+Vue.use(VueSwal)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

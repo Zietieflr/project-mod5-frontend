@@ -13,13 +13,23 @@ export function startTimer(
     : workTimer(timeValues.workTime, workTimerSN)
 }
 
-export function workTimer(workTimeMinutes, workTimerSN) {
+export function resetTimer() {
+  clearInterval(currentTimerID)
+  recentWorkTimer = false
+}
+
+export function resetNoActiveTimer() {
+  recentWorkTimer = false
+  initialTime = 0
+}
+
+function workTimer(workTimeMinutes, workTimerSN) {
   const workTimeSeconds = workTimeMinutes * 60
   currentTimerID = setInterval(() => timer(workTimeSeconds, workTimerSN), 1000)
   recentWorkTimer = true
 }
 
-export function breakTimer(breakTimeMinutes, breakTimerSN, completedTimer) {
+function breakTimer(breakTimeMinutes, breakTimerSN, completedTimer) {
   const breakTimeSeconds = breakTimeMinutes * 60
   currentTimerID = setInterval(() => timer(
       breakTimeSeconds,
@@ -36,10 +46,6 @@ function breakTimerEnd(completedTimer, systemNotification) {
   systemNotification()
 }
 
-export function resetTimer() {
-  clearInterval(currentTimerID)
-  recentWorkTimer = false
-}
 
 function timer(totalSeconds, systemNotification, onBreakCompletion = null) {
   if (initialTime >= totalSeconds) {
