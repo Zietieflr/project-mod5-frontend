@@ -15,7 +15,6 @@
       </form>
       <CompletedTimer v-for="(completedTimerValue, index) in completedTimerValues" :key="index + 'ctv'" :completedTimerValue="completedTimerValue" />
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
-      <button @click="completedTimer" >Start Timers!</button>
     </ul>
   </div>
 </template>
@@ -58,6 +57,11 @@ export default {
     clearTimerValues: function() {
       this.timerValues = []
       this.completedTimerValues = []
+    },
+    workTimerSystemNotification: function() {
+      this.$notification.show('Stop working!', {
+        body: 'Your break is just a click away!'
+      }, {})
     }
   }
 }
