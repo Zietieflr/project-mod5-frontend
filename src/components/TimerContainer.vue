@@ -52,7 +52,12 @@ export default {
       this.completedTimerValues.push(completedTimerValue)
     },
     startOnClick: function() {
-      startTimer(this.timerValues[0], this.completedTimer)
+      startTimer(
+        this.timerValues[0], 
+        this.completedTimer,
+        this.workTimerSystemNotification,
+        this.breakTimerSystemNotification,  
+      )
     },
     clearTimerValues: function() {
       this.timerValues = []
@@ -61,6 +66,11 @@ export default {
     workTimerSystemNotification: function() {
       this.$notification.show('Stop working!', {
         body: 'Your break is just a click away!'
+      }, {})
+    },
+    breakTimerSystemNotification: function() {
+      this.$notification.show("Let's get back to it!", {
+        body: 'Your focus window is just a click away!'
       }, {})
     }
   }
