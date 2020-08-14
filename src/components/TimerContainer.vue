@@ -9,9 +9,9 @@
         <label for="add-timer" class="hidden">Add timer</label>
         <a name="add-timer" @click="addTimerValue"><font-awesome-icon icon="plus" /></a>
         <label for="start-timers" class="hidden">Start Timers</label>
-        <a name="start-timers" @click="startOnClick"><font-awesome-icon icon="play" /></a>
+        <a name="start-timers" @click="startOnClick" v-if="canStart"><font-awesome-icon icon="play" /></a>
         <label for="clear-all" class="hidden">Clear All</label>
-        <a name="clear-all" @click="clearTimerValues"><font-awesome-icon icon="trash-alt" /></a>
+        <a name="clear-all" @click="clearTimerValues" v-if="canStart"><font-awesome-icon icon="trash-alt" /></a>
       </form>
       <CompletedTimer v-for="(completedTimerValue, index) in completedTimerValues" :key="index + 'ctv'" :completedTimerValue="completedTimerValue" />
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
@@ -46,10 +46,12 @@ export default {
         breakTime: this.breakTimeInput
       }
       this.timerValues.push(newTimerValue)
+      this.canStart = true
     },
     completedTimer: function() {
       const completedTimerValue = this.timerValues.shift()
       this.completedTimerValues.push(completedTimerValue)
+      this.timerValues.length ? this.canStart = true : this.canStart = false 
     },
     startOnClick: function() {
       startTimer(
@@ -62,6 +64,7 @@ export default {
     clearTimerValues: function() {
       this.timerValues = []
       this.completedTimerValues = []
+      this.canStart = false
     },
     workTimerSystemNotification() {
       this.$notification.show("Stop working!", {
@@ -70,7 +73,19 @@ export default {
       this.workTimerPageNotification()
     },
     workTimerPageNotification() {
-      this.$swal("Work over!")
+      this.$swal({
+        title: "One down!",
+        text: `Take a break, it'll still be there in ${this.timerValues[0].breakTime} minutes!`,
+        icon: "success",
+        buttons: {
+          break: {
+            text: "Break!",
+            value: true
+          },
+          cancel: false,
+        }
+      })
+        .then( value => value ? this.startOnClick() : null )
     },
     breakTimerSystemNotification() {
       this.$notification.show("Let's get back to it!", {
@@ -79,7 +94,23 @@ export default {
       this.breakTimerPageNotification()
     },
     breakTimerPageNotification() {
-      this.$swal("Break over!")
+      this.timerValues.length 
+        ? this.$swal({
+          title: "Invigorating!",
+          text: "Let's get back to it!",
+          buttons: {
+            break: {
+              text: "Focus!",
+              value: true
+            },
+            cancel: false,
+          }
+        })
+          .then( value => value ? this.startOnClick() : null )
+        : this.$swal(
+          "Set complete!",
+          "Look at all the hard work you did! See you next time!"
+        ) && (this.canStart = false)
     }
   }
 }
