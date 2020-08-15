@@ -1,6 +1,9 @@
 <template>
   <div class="visual-timer">
-    <VisualTimerChart :time="correctTimeValue" :setStart="setStart" />
+    <VisualTimerChart class="chart" :time="correctTimeValue" :setStart="setStart" />
+    <svg class="chart-cover" width="300" height="300">
+      <circle cx="150" cy="150" r="150" />
+    </svg>
   </div>
 </template>
 

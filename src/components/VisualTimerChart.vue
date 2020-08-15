@@ -10,7 +10,8 @@ export default {
       chartData: {
         datasets: [
           {
-            backgroundColor: ['#f87979', '#fff'],
+            // hsl(270, 95%, 70%) & hsl(270, 50%, 100%)
+            backgroundColor: ['#5E09B3', '#BF80FF'],
             data: [0, this.time()]
           },
         ]
