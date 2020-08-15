@@ -1,44 +1,45 @@
 let currentTimerID = null
-let recentWorkTimer = false
 let initialTime = 0
 
 export function startTimer(
     timeValues, 
-    completedTimer, 
+    setRecentWorkTimer,
+    completedTimer,
     workTimerSN, 
     breakTimerSN
   ) {
-  recentWorkTimer 
-    ? breakTimer(timeValues.breakTime, breakTimerSN, completedTimer) 
-    : workTimer(timeValues.workTime, workTimerSN)
+  setRecentWorkTimer()
+    ? breakTimer(timeValues.breakTime, breakTimerSN, setRecentWorkTimer, completedTimer) 
+    : workTimer(timeValues.workTime, workTimerSN, setRecentWorkTimer)
 }
 
-export function resetTimer() {
+export function resetTimer(setRecentWorkTimer) {
   clearInterval(currentTimerID)
-  recentWorkTimer = false
+  setRecentWorkTimer(false) 
 }
 
-export function resetNoActiveTimer() {
-  recentWorkTimer = false
+export function resetNoActiveTimer(setRecentWorkTimer) {
+  setRecentWorkTimer(false)
   initialTime = 0
 }
 
-function workTimer(workTimeMinutes, workTimerSN) {
+function workTimer(workTimeMinutes, workTimerSN, setRecentWorkTimer) {
   const workTimeSeconds = workTimeMinutes * 60
-  currentTimerID = setInterval(() => timer(workTimeSeconds, workTimerSN), 1000)
-  recentWorkTimer = true
+  currentTimerID = setInterval(() => timer(workTimeSeconds, workTimerSN, setRecentWorkTimer), 1000)
+  setRecentWorkTimer(true)
 }
 
-function breakTimer(breakTimeMinutes, breakTimerSN, completedTimer) {
+function breakTimer(breakTimeMinutes, breakTimerSN, setRecentWorkTimer, completedTimer) {
   const breakTimeSeconds = breakTimeMinutes * 60
   currentTimerID = setInterval(() => timer(
       breakTimeSeconds,
       breakTimerSN,
+      setRecentWorkTimer,
       completedTimer
     ), 
     [1000]
   )
-  recentWorkTimer = false
+  setRecentWorkTimer(false)
 }
 
 function breakTimerEnd(completedTimer, systemNotification) {
@@ -47,11 +48,11 @@ function breakTimerEnd(completedTimer, systemNotification) {
 }
 
 
-function timer(totalSeconds, systemNotification, onBreakCompletion = null) {
+function timer(totalSeconds, systemNotification, setRecentWorkTimer, onBreakCompletion = null) {
   if (initialTime >= totalSeconds) {
     clearInterval(currentTimerID)
     initialTime = 0
-    recentWorkTimer 
+    setRecentWorkTimer()
       ? systemNotification()
       : breakTimerEnd(onBreakCompletion, systemNotification)
   } else {

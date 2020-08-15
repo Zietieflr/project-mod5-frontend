@@ -16,19 +16,22 @@
       <CompletedTimer v-for="(completedTimerValue, index) in completedTimerValues" :key="index + 'ctv'" :completedTimerValue="completedTimerValue" />
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
     </ul>
+    <VisualTimer v-if="canStart" :timerValue="timerValues[0]" :recentWorkTimer="recentWorkTimer" />
   </div>
 </template>
 
 <script>
 import Timer from './Timer'
 import CompletedTimer from './CompletedTimer'
+import VisualTimer from './VisualTimer'
 import { startTimer } from '../utilityFunctions/timer'
 
 export default {
   name: "TimerContainer",
   components: {
     Timer,
-    CompletedTimer
+    CompletedTimer,
+    VisualTimer,
   },
   data() {
     return {
@@ -37,6 +40,7 @@ export default {
       timerValues: [],
       completedTimerValues: [],
       canStart: false,
+      recentWorkTimer: false,
     }
   },
   methods: {
@@ -55,11 +59,18 @@ export default {
     },
     startOnClick: function() {
       startTimer(
-        this.timerValues[0], 
+        this.timerValues[0],
+        this.setRecentWorkTimer, 
         this.completedTimer,
         this.workTimerSystemNotification,
         this.breakTimerSystemNotification,
       )
+    },
+    setRecentWorkTimer(setTo = "skip") {
+      setTo === "skip" 
+        ? this.recentWorkTimer
+        : this.recentWorkTimer = setTo
+      return this.recentWorkTimer
     },
     clearTimerValues: function() {
       this.timerValues = []
@@ -105,8 +116,7 @@ export default {
             },
             cancel: false,
           }
-        })
-          .then( value => value ? this.startOnClick() : null )
+        }).then( value => value ? this.startOnClick() : null )
         : this.$swal(
           "Set complete!",
           "Look at all the hard work you did! See you next time!"

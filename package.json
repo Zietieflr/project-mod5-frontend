@@ -11,8 +11,10 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
+    "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "vue-chartjs": "^3.5.0",
     "vue-native-notification": "^1.1.1",
     "vue-swal": "^1.0.0"
   },
