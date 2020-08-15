@@ -11,12 +11,12 @@
         <label for="start-timers" class="hidden">Start Timers</label>
         <a name="start-timers" @click="startOnClick" v-if="canStart"><font-awesome-icon icon="play" /></a>
         <label for="clear-all" class="hidden">Clear All</label>
-        <a name="clear-all" @click="clearTimerValues" v-if="canStart"><font-awesome-icon icon="trash-alt" /></a>
+        <a name="clear-all" @click="clearTimerValues" v-if="renderTrashButton()"><font-awesome-icon icon="trash-alt" /></a>
       </form>
       <CompletedTimer v-for="(completedTimerValue, index) in completedTimerValues" :key="index + 'ctv'" :completedTimerValue="completedTimerValue" />
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
     </ul>
-    <VisualTimer v-if="canStart" :timerValue="timerValues[0]" :recentWorkTimer="recentWorkTimer" />
+    <VisualTimer v-if="start" :timerValue="timerValues[0]" :recentWorkTimer="recentWorkTimer" :setStart="setStart" />
   </div>
 </template>
 
@@ -40,6 +40,7 @@ export default {
       timerValues: [],
       completedTimerValues: [],
       canStart: false,
+      start: false,
       recentWorkTimer: false,
     }
   },
@@ -65,6 +66,10 @@ export default {
         this.workTimerSystemNotification,
         this.breakTimerSystemNotification,
       )
+      this.start = true
+    },
+    setStart(boolean) {
+      this.start = boolean
     },
     setRecentWorkTimer(setTo = "skip") {
       setTo === "skip" 
@@ -121,26 +126,16 @@ export default {
           "Set complete!",
           "Look at all the hard work you did! See you next time!"
         ) && (this.canStart = false)
+    },
+    renderTrashButton() {
+      return (this.timerValues.length > 0 || this.completedTimerValues.length > 0)
+        ? true
+        : false
+    },
+    renderPlay() {
+
     }
   }
 }
 
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-/* h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-} */
-</style>

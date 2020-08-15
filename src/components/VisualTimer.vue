@@ -1,6 +1,6 @@
 <template>
-  <div id="visual-timer">
-    <VisualTimerChart :time="correctTimeValue" />
+  <div class="visual-timer">
+    <VisualTimerChart :time="correctTimeValue" :setStart="setStart" />
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import VisualTimerChart from "./VisualTimerChart"
 
 export default {
   name: "VisualTimer",
-  props: [ "timerValue", "recentWorkTimer" ],
+  props: [ "timerValue", "recentWorkTimer", "setStart" ],
   components: {
     VisualTimerChart,
   },
