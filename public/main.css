@@ -144,7 +144,19 @@ ul {
   transform: translate(-50%, -50%);
   fill: hsl(270, 95%, 15%);
   stroke: hsl(30, 20%, 90%);
-  stroke-width: 2px;
+  stroke-width: 3px;
+}
+
+.visual-timer > .time {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: hsl(30, 20%, 90%);
+  font-size: 4rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px hsl(0, 0%, 0%);
+  z-index: 2;
 }
 
 .hidden {

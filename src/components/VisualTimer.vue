@@ -1,8 +1,14 @@
 <template>
   <div class="visual-timer">
-    <VisualTimerChart class="chart" :time="correctTimeValue" :setStart="setStart" />
-    <svg class="chart-cover" width="300" height="300">
-      <circle cx="150" cy="150" r="150" />
+    <VisualTimerChart 
+      class="chart"
+      :time="correctTime"
+      :setStart="setStart"
+      :decreaseTime="decreaseTime"
+    />
+    <h3 class="time">{{ displayTime() }}</h3>
+    <svg class="chart-cover" width="250" height="250">
+      <circle cx="125" cy="125" r="125" />
     </svg>
   </div>
 </template>
@@ -16,11 +22,29 @@ export default {
   components: {
     VisualTimerChart,
   },
+  data() {
+    return {
+      remainingTime: 0,
+    }
+  },
+  mounted() {
+    this.remainingTime = this.correctTime()
+  },
   methods: {
-    correctTimeValue() {
-      return this.recentWorkTimer 
+    correctTime() {
+      return this.recentWorkTimer
         ? this.timerValue.breakTime * 60
         : this.timerValue.workTime * 60
+    },
+    decreaseTime() {
+      this.remainingTime -= 1
+    },
+    displayTime() {
+      const minutes = Math.floor(this.remainingTime/60)
+      const seconds = this.remainingTime%60
+      const minutesString = minutes >= 10 ? `${minutes}` : `0${minutes}`
+      const secondsString = seconds >= 10 ? `:${seconds}` : `:0${seconds}`
+      return minutesString + secondsString
     }
   }
 }

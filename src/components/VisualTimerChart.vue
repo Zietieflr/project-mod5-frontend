@@ -4,7 +4,7 @@ import { Pie } from 'vue-chartjs'
 export default {
   extends: Pie,
   name: "VisualTimer",
-  props: [ "time", "setStart" ],
+  props: [ "time", "setStart", "decreaseTime" ],
   data() {
     return {
       chartData: {
@@ -37,6 +37,7 @@ export default {
         } else {
           this.chartData.datasets[0].data[0] += 1
           this.chartData.datasets[0].data[1] -= 1
+          this.decreaseTime()
           this.$data._chart.update()
         }
       }, 1000)
