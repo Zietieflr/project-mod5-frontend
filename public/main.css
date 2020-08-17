@@ -74,17 +74,18 @@ ul {
   opacity: 75%;
 }
 
-.add-timers > a {
+.add-timers > button {
   color: hsl(30, 20%, 90%);
   background-color: hsl(270, 95%, 15%);
   padding: 5px;
-  width: 70px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
+  border: none;
   border-radius: 15px;
   box-shadow: 2px 2px 5px -2px hsl(270, 95%, 15%);
 }
 
-.add-timers > a:active {
+.add-timers > button:active {
   box-shadow: 2px 2px 5px -2px hsl(270, 95%, 15%);
 }
 

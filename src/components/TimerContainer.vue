@@ -7,11 +7,13 @@
         <label for="break-timer-Input" class="hidden">Break Time (minutes):</label>
         <input v-model="breakTimeInput" name="break-timer-Input" type="number" placeholder="Break Time (minutes)" />
         <label for="add-timer" class="hidden">Add timer</label>
-        <a name="add-timer" @click="addTimerValue"><font-awesome-icon icon="plus" /></a>
+        <button name="add-timer" @click="addTimerValue"><font-awesome-icon icon="plus" /></button>
         <label for="start-timers" class="hidden">Start Timers</label>
-        <a name="start-timers" @click="startOnClick" v-if="canStart"><font-awesome-icon icon="play" /></a>
+        <button name="start-timers" @click="startOnClick" v-if="canStart"><font-awesome-icon icon="play" /></button>
+        <label for="reset-complete" class="hidden">Reset Completed Timers</label>
+        <button name="reset-complete" @click="recycleTimers" v-if="renderRecycleButton()"><font-awesome-icon icon="history" /></button>
         <label for="clear-all" class="hidden">Clear All</label>
-        <a name="clear-all" @click="clearTimerValues" v-if="renderTrashButton()"><font-awesome-icon icon="trash-alt" /></a>
+        <button name="clear-all" @click="clearTimerValues" v-if="renderTrashButton()"><font-awesome-icon icon="trash-alt" /></button>
       </form>
       <CompletedTimer v-for="(completedTimerValue, index) in completedTimerValues" :key="index + 'ctv'" :completedTimerValue="completedTimerValue" />
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
@@ -132,8 +134,16 @@ export default {
         ? true
         : false
     },
-    renderPlay() {
-
+    renderRecycleButton() {
+      return this.completedTimerValues.length
+        ? true
+        : false
+    },
+    recycleTimers() {
+      this.completedTimerValues.reverse().forEach(value => {this.timerValues.unshift(value)})
+      this.completedTimerValues = []
+      this.setRecentWorkTimer(false)
+      this.canStart = true
     }
   }
 }

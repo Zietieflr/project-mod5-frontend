@@ -33,8 +33,8 @@ export default {
   methods: {
     correctTime() {
       return this.recentWorkTimer
-        ? this.timerValue.breakTime * 60
-        : this.timerValue.workTime * 60
+        ? this.timerValue.workTime * 60
+        : this.timerValue.breakTime * 60
     },
     decreaseTime() {
       this.remainingTime -= 1
