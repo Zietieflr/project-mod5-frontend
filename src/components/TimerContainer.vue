@@ -19,14 +19,16 @@
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
     </ul>
     <VisualTimer v-if="start" :timerValue="timerValues[0]" :recentWorkTimer="recentWorkTimer" :setStart="setStart" />
+    <SchedulesContainer v-if="validToken" /> 
   </div>
 </template>
 
 <script>
-import Timer from './Timer'
-import CompletedTimer from './CompletedTimer'
-import VisualTimer from './VisualTimer'
-import { startTimer } from '../utilityFunctions/timer'
+import Timer from "./Timer"
+import CompletedTimer from "./CompletedTimer"
+import VisualTimer from "./VisualTimer"
+import { startTimer } from "../utilityFunctions/timer"
+import SchedulesContainer from "./SchedulesContainer"
 
 export default {
   name: "TimerContainer",
@@ -34,7 +36,9 @@ export default {
     Timer,
     CompletedTimer,
     VisualTimer,
+    SchedulesContainer
   },
+  props: [ "validToken" ],
   data() {
     return {
       workTimeInput: "",
@@ -144,7 +148,7 @@ export default {
       this.completedTimerValues = []
       this.setRecentWorkTimer(false)
       this.canStart = true
-    }
+    },
   }
 }
 
