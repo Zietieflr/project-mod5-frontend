@@ -1,5 +1,5 @@
 <template>
-  <div class="timer-container">
+  <main class="timer-container">
     <ul>
       <form v-on:submit.prevent class="add-timers">
         <label for="work-timer-Input" class="hidden">Work Time (minutes):</label>
@@ -20,7 +20,7 @@
     </ul>
     <VisualTimer v-if="start" :timerValue="timerValues[0]" :recentWorkTimer="recentWorkTimer" :setStart="setStart" />
     <SchedulesContainer v-if="validToken" /> 
-  </div>
+  </main>
 </template>
 
 <script>

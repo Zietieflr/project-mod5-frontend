@@ -1,4 +1,4 @@
-export function getDelete(url, id) {
+export function fetchDELETE(url, id) {
   return fetch(url + id, {
     method: "Delete",
     headers: {
@@ -6,6 +6,16 @@ export function getDelete(url, id) {
       "Authorization": `Bearer ${localStorage.getItem("token")}`
     }
   })
+}
+
+export function fetchGET(url) {
+  return fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    }
+  }).then(response => response.json())
 }
 
 export function boilerFetch(url, method, body) {

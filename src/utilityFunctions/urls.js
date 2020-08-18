@@ -1,7 +1,7 @@
 const urls = {
-  user: "http://localhost:8080/users/",
-  login: "http://localhost:8080/login/",
-  schedules: "http://localhost:8080/schedules/"
+  users: "http://localhost:3000/users/",
+  login: "http://localhost:3000/login/",
+  schedules: "http://localhost:3000/schedules/"
 }
 
 export default function url(key) {

@@ -1,13 +1,13 @@
 <template>
   <form @submit.prevent >
-    <fieldset v-if="showSignIn" >
+    <fieldset v-if="showSignIn && !validToken" >
       <legend>{{ submitToLabel }}</legend>
       <label for="username" class="hidden">Username:</label>
-        <input name="username" id="username" placeholder="Username" />
+        <input v-model="username" name="username" id="username" placeholder="Username" />
       <label for="password" class="hidden">Password:</label>
-        <input name="password" id="password" type="password" placeholder="Password" />
-      <label for="login" class="hidden">Submit</label>
-        <button name="login" id="login" ><font-awesome-icon icon="sign-in-alt" /></button>
+        <input v-model="password" name="password" id="password" type="password" placeholder="Password" />
+      <label for="sign-in" class="hidden" >Submit</label>
+        <button name="sign-in" id="sign-in" @click="signIn" ><font-awesome-icon icon="sign-in-alt" /></button>
       <label for="toggleSignUp" class="hidden">Switch to {{ switchToLabel }}</label>
         <button name="toggleSignUp" id="toggleSignup" @click="toggleSignIn" ><font-awesome-icon icon="sync-alt" /></button>
     </fieldset>
@@ -22,12 +22,14 @@
           <font-awesome-icon icon="sign-out-alt" />
         </button>
     </fieldset>
+    <p v-if="errorMessage" class="error">{{ errorMessage }}</p>
+    <p v-if="validToken && username" class="welcome">Welcome, {{ username }}!</p>
   </form>
 </template>
 
 <script>
-// import { login } from "./utilityFunctions/helpers"
-// import url from "./utilityFunctions/urls"
+import { login } from "../utilityFunctions/helpers"
+import url from "../utilityFunctions/urls"
 
 export default {
   name: "Login",
@@ -37,7 +39,14 @@ export default {
       showSignIn: false,
       isLogin: true,
       username: "",
-      password: ""
+      password: "",
+      errorMessage: "",
+    }
+  },
+  mounted: function() {
+    if(localStorage.getItem("token")) {
+      this.setError("")
+      this.toggleValidToken()
     }
   },
   computed: {
@@ -57,13 +66,28 @@ export default {
     },
     logout() {
       localStorage.removeItem("token")
+      this.toggleValidToken()
+      this.username = ""
+      this.password = ""
     },
-    login() {
-      // fetch
-      // addToken
-      // toggleValidToken()
-      // error handling
+    signIn() {
+      const urlKey = this.isLogin ? "login" : "users"
+      login(url(urlKey), {user: {username: this.username, password: this.password}})
+        .then(result => {
+          if(result.error) {
+            this.setError(result.error)
+          } else {
+            localStorage.setItem("token", result.token)
+            this.setError("")
+            this.toggleValidToken()
+            this.toggleShowSignIn()
+            !this.isLogin ? this.toggleSignIn() : null
+          }
+        })
     },
+    setError(error) {
+      this.errorMessage = error
+    }
   }
 }
 </script>

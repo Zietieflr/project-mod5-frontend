@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Title message="O'Tock" />
-    <TimerContainer /> 
+    <TimerContainer :validToken="validToken" /> 
     <Login :toggleValidToken="toggleValidToken" :validToken="validToken" />
   </div>
 </template>
@@ -24,9 +24,6 @@ export default {
     }
   },
   methods: {
-    tokenTrue() {
-      return localStorage.getItem("token") ? true : false
-    },
     toggleValidToken() {
       this.validToken = !this.validToken
     }
