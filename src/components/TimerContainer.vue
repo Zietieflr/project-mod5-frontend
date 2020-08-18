@@ -19,7 +19,7 @@
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
     </ul>
     <VisualTimer v-if="start" :timerValue="timerValues[0]" :recentWorkTimer="recentWorkTimer" :setStart="setStart" />
-    <SchedulesContainer v-if="validToken" /> 
+    <SchedulesContainer :validToken="validToken" /> 
   </main>
 </template>
 

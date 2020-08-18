@@ -6,17 +6,20 @@ import VueNativeNotification from 'vue-native-notification'
 import VueSwal from 'vue-swal'
 import { 
   faPlay, 
-  faPlus, 
+  faPlus,
+  faMinus,
+  faMinusCircle,
   faTrashAlt, 
   faHistory, 
   faSignInAlt, 
   faSignOutAlt,
   faEye,
-  faSyncAlt
+  faSyncAlt,
+  faBars
 } from '@fortawesome/free-solid-svg-icons'
 
 
-library.add(faPlay, faPlus, faTrashAlt, faHistory, faSignInAlt, faSignOutAlt, faEye, faSyncAlt)
+library.add(faPlay, faPlus, faMinus, faMinusCircle, faTrashAlt, faHistory, faSignInAlt, faSignOutAlt, faEye, faSyncAlt, faBars)
 Vue.use(VueNativeNotification, {requestOnNotify: true})
 Vue.use(VueSwal)
 

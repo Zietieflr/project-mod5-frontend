@@ -1,10 +1,10 @@
 <template>
   <li class="timer-value">
     <p>
-      Work time: {{ timerValue.workTime }}
+      Work time: {{ timerValue.workTime || timerValue.work_time }}
     </p>
     <p>
-      Break time: {{ timerValue.breakTime }}
+      Break time: {{ timerValue.breakTime || timerValue.break_time }}
     </p>
   </li>
 </template>
