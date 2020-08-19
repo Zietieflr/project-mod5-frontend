@@ -10,6 +10,7 @@
         :addFromSchedule="addFromSchedule"
       />
     </ul>
+    <p v-if="(schedules.length === 0)">Must be logged in to use this feature.</p>
   </section>
 </template>
 

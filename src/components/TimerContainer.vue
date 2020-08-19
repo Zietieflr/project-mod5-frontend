@@ -6,7 +6,7 @@
         <input v-model="workTimeInput" name="work-timer-Input" type="number" placeholder="Work Time (minutes)" />
         <label for="break-timer-Input" class="hidden">Break Time (minutes):</label>
         <input v-model="breakTimeInput" name="break-timer-Input" type="number" placeholder="Break Time (minutes)" />
-        <label for="add-timer" class="hidden">Add timer</label>
+        <label for="add-timer" class="hidden">Add timer</label><br/>
         <button name="add-timer" @click="addTimerValue"><font-awesome-icon icon="plus" /></button>
         <label for="start-timers" class="hidden">Start Timers</label>
         <button name="start-timers" @click="startOnClick" v-if="canStart"><font-awesome-icon icon="play" /></button>
@@ -110,13 +110,16 @@ export default {
       this.$swal({
         title: "One down!",
         text: `Take a break, it'll still be there in ${this.timerValues[0].breakTime} minutes!`,
-        icon: "success",
         buttons: {
-          break: {
+          cancel: {
+            text: "Cancel",
+            value: false,
+            visible: true
+          },
+          confirm: {
             text: "Break!",
             value: true
           },
-          cancel: false,
         }
       })
         .then( value => value ? this.startOnClick() : null )
@@ -133,17 +136,26 @@ export default {
           title: "Invigorating!",
           text: "Let's get back to it!",
           buttons: {
-            break: {
+            cancel: {
+              text: "Cancel",
+              value: false,
+              visible: true
+            },
+            confirm: {
               text: "Focus!",
               value: true
             },
-            cancel: false,
           }
         }).then( value => value ? this.startOnClick() : null )
-        : this.$swal(
-          "Set complete!",
-          "Look at all the hard work you did! See you next time!"
-        ) && (this.canStart = false)
+        : this.$swal({
+          title: "Set complete!",
+          text: "Look at all the hard work you did! See you next time!",
+          buttons: {
+            confirm: {
+              text: "High Five!"
+            }
+          }
+        }) && (this.canStart = false)
     },
     renderTrashButton() {
       return (this.timerValues.length > 0 || this.completedTimerValues.length > 0)
@@ -183,6 +195,15 @@ export default {
           element: "input",
           attributes: {
             placeholder: "Schedule Name"
+          },
+          buttons: {
+            confirm: {
+              text: "Save",
+              value: true
+            },
+            cancel: {
+              value: false
+            }
           }
         }
       }).then(value => this.saveSchedule(value))
