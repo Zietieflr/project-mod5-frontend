@@ -7,6 +7,7 @@
         :key="schedule.id" 
         :schedule="schedule" 
         :deleteSchedule="deleteSchedule" 
+        :addFromSchedule="addFromSchedule"
       />
     </ul>
   </section>
@@ -19,7 +20,7 @@
 
   export default {
     name: "SchedulesContainer",
-    props: [ "validToken", "schedules", "setSchedules", "getSchedules" ],
+    props: [ "validToken", "schedules", "setSchedules", "getSchedules", "addFromSchedule" ],
     components: {
       Schedule,
     },

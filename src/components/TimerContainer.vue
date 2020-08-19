@@ -21,7 +21,7 @@
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
     </ul>
     <VisualTimer v-if="start" :timerValue="timerValues[0]" :recentWorkTimer="recentWorkTimer" :setStart="setStart" />
-    <SchedulesContainer :validToken="validToken" :schedules="schedules" :setSchedules="setSchedules" :getSchedules="getSchedules" /> 
+    <SchedulesContainer :validToken="validToken" :schedules="schedules" :setSchedules="setSchedules" :getSchedules="getSchedules" :addFromSchedule="addFromSchedule" /> 
   </main>
 </template>
 
@@ -65,6 +65,10 @@ export default {
         breakTime: this.breakTimeInput
       }
       this.timerValues.push(newTimerValue)
+      this.canStart = true
+    },
+    addFromSchedule: function(timerValue) {
+      this.timerValues.push(timerValue)
       this.canStart = true
     },
     completedTimer: function() {
