@@ -20,7 +20,7 @@ export function fetchGET(url) {
 
 export function boilerFetch(url, method, body) {
   return fetch(url, {
-    method,
+    method: method,
     headers: {
       "Content-Type": "application/json",
       "Authorization": `Bearer ${localStorage.getItem("token")}`

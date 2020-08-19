@@ -15,11 +15,12 @@ import {
   faSignOutAlt,
   faEye,
   faSyncAlt,
-  faBars
+  faBars,
+  faSave,
 } from '@fortawesome/free-solid-svg-icons'
 
 
-library.add(faPlay, faPlus, faMinus, faMinusCircle, faTrashAlt, faHistory, faSignInAlt, faSignOutAlt, faEye, faSyncAlt, faBars)
+library.add(faPlay, faPlus, faMinus, faMinusCircle, faTrashAlt, faHistory, faSignInAlt, faSignOutAlt, faEye, faSyncAlt, faBars, faSave)
 Vue.use(VueNativeNotification, {requestOnNotify: true})
 Vue.use(VueSwal)
 

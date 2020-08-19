@@ -12,6 +12,8 @@
         <button name="start-timers" @click="startOnClick" v-if="canStart"><font-awesome-icon icon="play" /></button>
         <label for="reset-complete" class="hidden">Reset Completed Timers</label>
         <button name="reset-complete" @click="recycleTimers" v-if="renderRecycleButton()"><font-awesome-icon icon="history" /></button>
+        <label for="save-schedule" class="hidden">Save Schedule</label>
+        <button name="save-schedule" @click="savePopUp" v-if="renderTrashButton()"><font-awesome-icon icon="save" /></button>
         <label for="clear-all" class="hidden">Clear All</label>
         <button name="clear-all" @click="clearTimerValues" v-if="renderTrashButton()"><font-awesome-icon icon="trash-alt" /></button>
       </form>
@@ -19,7 +21,7 @@
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />
     </ul>
     <VisualTimer v-if="start" :timerValue="timerValues[0]" :recentWorkTimer="recentWorkTimer" :setStart="setStart" />
-    <SchedulesContainer :validToken="validToken" /> 
+    <SchedulesContainer :validToken="validToken" :schedules="schedules" :setSchedules="setSchedules" :getSchedules="getSchedules" /> 
   </main>
 </template>
 
@@ -27,8 +29,10 @@
 import Timer from "./Timer"
 import CompletedTimer from "./CompletedTimer"
 import VisualTimer from "./VisualTimer"
-import { startTimer } from "../utilityFunctions/timer"
 import SchedulesContainer from "./SchedulesContainer"
+import { startTimer } from "../utilityFunctions/timer"
+import { boilerFetch, fetchGET } from "../utilityFunctions/helpers"
+import url from "../utilityFunctions/urls"
 
 export default {
   name: "TimerContainer",
@@ -48,7 +52,11 @@ export default {
       canStart: false,
       start: false,
       recentWorkTimer: false,
+      schedules: [],
     }
+  },
+  mounted: function() {
+      if(this.validToken) { this.getSchedules() }
   },
   methods: {
     addTimerValue: function() {
@@ -144,10 +152,50 @@ export default {
         : false
     },
     recycleTimers() {
-      this.completedTimerValues.reverse().forEach(value => {this.timerValues.unshift(value)})
+      this.completedTimerValues.reverse().forEach(value => this.timerValues.unshift(value))
       this.completedTimerValues = []
       this.setRecentWorkTimer(false)
       this.canStart = true
+    },
+    saveSchedule(name) {
+      name = name ? name : "My Schedule"
+      console.log(name)
+      let timeValues = []
+      this.completedTimerValues.reverse().forEach(value => timeValues.unshift(value))
+      this.timerValues.forEach(value => timeValues.push(value))
+      timeValues = timeValues.map(value => {
+        return {work_time: value.workTime, break_time: value.breakTime}
+      })
+      return boilerFetch(url("schedules"), "POST", {schedule: {name, time_values_attributes: timeValues}})
+        .then(result => {
+          this.getSchedules()
+          return result  
+        })
+    },
+    savePopUp() {
+      this.$swal({
+        title: "Enter your schedule name:",
+        content: {
+          element: "input",
+          attributes: {
+            placeholder: "Schedule Name"
+          }
+        }
+      }).then(value => this.saveSchedule(value))
+    },
+    setSchedules(schedules) {
+      this.schedules = schedules
+    },
+    renameAttributes(schedules) {
+      return schedules.map(schedule => {
+        schedule.time_values_attributes = schedule.time_values
+        delete schedule.time_values
+        return schedule
+      })
+    },
+    getSchedules() {
+      fetchGET(url("schedules"))
+        .then(result => this.setSchedules(this.renameAttributes(result)))
     },
   }
 }
