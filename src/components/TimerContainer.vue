@@ -15,7 +15,7 @@
         <label for="save-schedule" class="hidden">Save Schedule</label>
         <button name="save-schedule" @click="savePopUp" v-if="renderTrashButton()"><font-awesome-icon icon="save" /></button>
         <label for="clear-all" class="hidden">Clear All</label>
-        <button name="clear-all" @click="clearTimerValues" v-if="renderTrashButton()"><font-awesome-icon icon="trash-alt" /></button>
+        <button name="clear-all" @click="clearTimerValues" v-if="renderTrashButton()"><font-awesome-icon icon="eraser" /></button>
       </form>
       <CompletedTimer v-for="(completedTimerValue, index) in completedTimerValues" :key="index + 'ctv'" :completedTimerValue="completedTimerValue" />
       <Timer v-for="(timerValue, index) in timerValues" :key="index + 'itv'" :timerValue="timerValue" />

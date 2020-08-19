@@ -33,8 +33,40 @@ h1 {
   text-shadow: 1px 1px 3px hsl(0, 0%, 0%);
 }
 
-ul {
+.sign-in-form {
+  position: absolute;
+  display: flex;
+  top: 0;
+  right: 0;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.sign-in-form > fieldset > legend {
+  color: hsl(30, 20%, 90%);
+  text-shadow: 1px 1px 3px hsl(0, 0%, 0%);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.sign-in-form > p {
+  position: absolute;
+  top: 3px;
+  right: 70px; 
+  color: hsl(30, 20%, 100%);
+  text-shadow: 1px 1px 3px hsl(0, 0%, 0%);
+  font-weight: 600;
+}
+
+.sign-in-form > .error {
+  color: red;
+}
+
+main {
   background-color: hsl(30, 20%, 90%);
+  display: flex; 
+  flex-wrap: wrap;
   width: inherit;
   height: min-content;
   padding: 1rem;
@@ -42,17 +74,23 @@ ul {
   border-radius: 1rem;
 }
 
+main > ul {
+  width: 52%;
+}
+
 .add-timers {
   margin-bottom: 10px;
 }
 
-.add-timers > input {
+input {
   border: none;
   font-size: 1.25rem;
   color: hsl(270, 95%, 15%);
   background-color: hsl(30, 20%, 100%);
+  width: 200px;
   padding: .25rem;
-  margin-right: 1rem;
+  margin-right: .5rem;
+  margin-bottom: 5px;
   box-shadow: 2px 2px 5px -5px hsl(270, 95%, 15%);
   border-radius: 6px;
 }
@@ -74,7 +112,7 @@ ul {
   opacity: 75%;
 }
 
-.add-timers > button {
+button {
   color: hsl(30, 20%, 90%);
   background-color: hsl(270, 95%, 15%);
   padding: 5px;
@@ -83,14 +121,19 @@ ul {
   border: none;
   border-radius: 15px;
   box-shadow: 2px 2px 5px -2px hsl(270, 95%, 15%);
+  margin-right: 5px;
 }
 
-.add-timers > button:active {
+button:active {
   box-shadow: 2px 2px 5px -2px hsl(270, 95%, 15%);
 }
 
+main > ul > form > button {
+  margin-right: 15px;
+}
+
 .timer-value {
-  width: 20rem;
+  width: 18rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -119,6 +162,50 @@ ul {
   margin-bottom: 5px;
   box-shadow: 2px 2px 5px -5px hsl(270, 95%, 15%);
   border-radius: 6px;
+}
+
+.schedules-container {
+  box-shadow: -2px 0px 5px -5px hsl(270, 95%, 15%);
+  padding: .5rem; 
+  padding-top: 0;
+  width: 46%;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: hsl(30, 20%, 90%);
+  text-shadow: 1px 1px 3px hsl(0, 0%, 0%);
+  background-image: linear-gradient(to top, hsl(270, 95%, 15%), hsla(270, 95%, 15%, .1));
+  border-radius: 6px;
+  width: 100%;
+  padding: 4px;
+  margin-bottom: 5px;
+}
+
+.schedule {
+  margin-bottom: 8px;
+}
+
+.schedule > p {
+  background-color: hsl(30, 20%, 100%);
+  font-size: 1.25rem;
+  padding: .5rem;
+  margin-bottom: 5px;
+  box-shadow: 2px 2px 5px -5px hsl(270, 95%, 15%);
+  border-radius: 6px;
+}
+
+.schedule > button {
+  margin-left: 15px;
+  margin-right: 0;
+}
+
+.schedule > ul {
+  width: 352px;
+  margin-top: 5px;
+  padding: 5px; 
+  box-shadow: 0 0 5px -3px hsl(270, 95%, 15%);
 }
 
 .visual-timer {

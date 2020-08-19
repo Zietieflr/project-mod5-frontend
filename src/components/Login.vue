@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent >
+  <form @submit.prevent class="sign-in-form" >
     <fieldset v-if="showSignIn && !validToken" >
       <legend>{{ submitToLabel }}</legend>
       <label for="username" class="hidden">Username:</label>
@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     submitToLabel: function() {
-      return this.isLogin ? "Login Here" : "Sign Up Here"
+      return this.isLogin ? "Login Here:" : "Sign Up Here:"
     },
     switchToLabel: function() {
       return this.isLogin ? "Sign Up" : "Login"
