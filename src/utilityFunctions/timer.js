@@ -30,9 +30,12 @@ export function resetNoActiveTimer(setRecentWorkTimer) {
 
 function workTimer(workTimeMinutes, workTimerSN, setRecentWorkTimer) {
   const workTimeSeconds = workTimeMinutes * 60
-  currentTimerID = setInterval(() => {
-    return timer(workTimeSeconds, workTimerSN, setRecentWorkTimer), 1000
-  })
+  currentTimerID = setInterval(() => timer(
+    workTimeSeconds, 
+    workTimerSN, 
+    setRecentWorkTimer), 
+    1000
+  )
   setRecentWorkTimer(true)
 }
 
@@ -49,7 +52,7 @@ function breakTimer(
       setRecentWorkTimer,
       completedTimer
     ), 
-    [1000]
+    1000
   )
   setRecentWorkTimer(false)
 }
