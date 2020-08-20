@@ -31,9 +31,9 @@ Doing this will host the Frontend on [http://localhost:8080](http://localhost:80
 
 ## Technologies
 This project was built with:
--Vue
--Ruby on Rails
--SweetAlerts (via VueSwal)
--Chart.js (via vue-chartjs)
--FontAwesome (via vue-fontawesome)
--Web Notification API (via vue-native-notification)
+- Vue
+- Ruby on Rails
+- SweetAlerts (via VueSwal)
+- Chart.js (via vue-chartjs)
+- FontAwesome (via vue-fontawesome)
+- Web Notification API (via vue-native-notification)
