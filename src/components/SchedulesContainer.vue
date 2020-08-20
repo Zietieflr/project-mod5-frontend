@@ -10,7 +10,9 @@
         :addFromSchedule="addFromSchedule"
       />
     </ul>
-    <p v-if="(schedules.length === 0)">Must be logged in to use this feature.</p>
+    <p v-if="(schedules.length === 0 && !validToken)">
+      Must be logged in to use this feature.
+    </p>
   </section>
 </template>
 
@@ -21,7 +23,13 @@
 
   export default {
     name: "SchedulesContainer",
-    props: [ "validToken", "schedules", "setSchedules", "getSchedules", "addFromSchedule" ],
+    props: [ 
+      "validToken", 
+      "schedules", 
+      "setSchedules", 
+      "getSchedules", 
+      "addFromSchedule"
+    ],
     components: {
       Schedule,
     },
@@ -31,7 +39,9 @@
     methods: {
       deleteSchedule(id) {
         fetchDELETE(url("schedules"), id)
-        this.setSchedules(this.schedules.filter( schedule => schedule.id !== id ))
+        this.setSchedules(this.schedules.filter(schedule => {
+          return schedule.id !== id
+        }))
       },
     },
     watch: {
