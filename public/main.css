@@ -33,40 +33,8 @@ h1 {
   text-shadow: 1px 1px 3px hsl(0, 0%, 0%);
 }
 
-.sign-in-form {
-  position: absolute;
-  display: flex;
-  top: 0;
-  right: 0;
-  margin-top: 5px;
-  margin-right: 5px;
-}
-
-.sign-in-form > fieldset > legend {
-  color: hsl(30, 20%, 90%);
-  text-shadow: 1px 1px 3px hsl(0, 0%, 0%);
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 5px;
-}
-
-.sign-in-form > p {
-  position: absolute;
-  top: 3px;
-  right: 70px; 
-  color: hsl(30, 20%, 100%);
-  text-shadow: 1px 1px 3px hsl(0, 0%, 0%);
-  font-weight: 600;
-}
-
-.sign-in-form > .error {
-  color: red;
-}
-
-main {
+ul {
   background-color: hsl(30, 20%, 90%);
-  display: flex; 
-  flex-wrap: wrap;
   width: inherit;
   height: min-content;
   padding: 1rem;
@@ -74,23 +42,17 @@ main {
   border-radius: 1rem;
 }
 
-main > ul {
-  width: 52%;
-}
-
 .add-timers {
   margin-bottom: 10px;
 }
 
-input {
+.add-timers > input {
   border: none;
   font-size: 1.25rem;
   color: hsl(270, 95%, 15%);
   background-color: hsl(30, 20%, 100%);
-  width: 200px;
   padding: .25rem;
-  margin-right: .5rem;
-  margin-bottom: 5px;
+  margin-right: 1rem;
   box-shadow: 2px 2px 5px -5px hsl(270, 95%, 15%);
   border-radius: 6px;
 }
@@ -112,7 +74,7 @@ input {
   opacity: 75%;
 }
 
-button {
+.add-timers > button {
   color: hsl(30, 20%, 90%);
   background-color: hsl(270, 95%, 15%);
   padding: 5px;
@@ -121,19 +83,14 @@ button {
   border: none;
   border-radius: 15px;
   box-shadow: 2px 2px 5px -2px hsl(270, 95%, 15%);
-  margin-right: 5px;
 }
 
-button:active {
+.add-timers > button:active {
   box-shadow: 2px 2px 5px -2px hsl(270, 95%, 15%);
 }
 
-main > ul > form > button {
-  margin-right: 15px;
-}
-
 .timer-value {
-  width: 18rem;
+  width: 20rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -141,15 +98,15 @@ main > ul > form > button {
   color: hsl(270, 95%, 15%);
   background-color: hsl(30, 20%, 100%);
   padding: .5rem;
-  padding-left: 1rem;
-  padding-right: 1rem; 
+  padding-left: 2rem;
+  padding-right: 2rem; 
   margin-bottom: 5px;
   box-shadow: 2px 2px 5px -5px hsl(270, 95%, 15%);
   border-radius: 6px;
 }
 
 .completed-timer-value {
-  width: 18rem;
+  width: 20rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -157,55 +114,11 @@ main > ul > form > button {
   color: hsla(270, 95%, 15%, 75%);
   background-color: hsl(30, 20%, 90%);
   padding: .5rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   margin-bottom: 5px;
   box-shadow: 2px 2px 5px -5px hsl(270, 95%, 15%);
   border-radius: 6px;
-}
-
-.schedules-container {
-  box-shadow: -2px 0px 5px -5px hsl(270, 95%, 15%);
-  padding: .5rem; 
-  padding-top: 0;
-  width: 46%;
-}
-
-h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: hsl(30, 20%, 90%);
-  text-shadow: 1px 1px 3px hsl(0, 0%, 0%);
-  background-image: linear-gradient(to top, hsl(270, 95%, 15%), hsla(270, 95%, 15%, .1));
-  border-radius: 6px;
-  width: 100%;
-  padding: 4px;
-  margin-bottom: 5px;
-}
-
-.schedule {
-  margin-bottom: 8px;
-}
-
-.schedule > p {
-  background-color: hsl(30, 20%, 100%);
-  font-size: 1.25rem;
-  padding: .5rem;
-  margin-bottom: 5px;
-  box-shadow: 2px 2px 5px -5px hsl(270, 95%, 15%);
-  border-radius: 6px;
-}
-
-.schedule > button {
-  margin-left: 15px;
-  margin-right: 0;
-}
-
-.schedule > ul {
-  width: 352px;
-  margin-top: 5px;
-  padding: 5px; 
-  box-shadow: 0 0 5px -3px hsl(270, 95%, 15%);
 }
 
 .visual-timer {
@@ -214,7 +127,6 @@ h3 {
   top: 0;
   left: 0;
   background-color: hsla(270, 95%, 15%, 20%);
-  background-size: cover;
   position: absolute;
   z-index: 1;
 }
@@ -238,8 +150,6 @@ h3 {
 
 .visual-timer > .time {
   position: absolute;
-  width: auto;
-  background-image: none;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -250,44 +160,7 @@ h3 {
   z-index: 2;
 }
 
-.swal-overlay {
-  background-color: hsla(270, 95%, 15%, 20%);
-}
-
-.swal-modal {
-  background-color: hsl(30, 20%, 90%);
-  box-shadow: 2px 2px 5px -3px hsl(270, 95%, 15%);
-  border-radius: 6px;
-}
-
-.swal-button--confirm {
-  width: fit-content;
-  padding: 7px 15px;
-  border-radius: 6px;
-  font-size: 12px;
-  border: 1px solid hsl(30, 20%, 100%);
-  background-color: hsl(270, 95%, 15%);
-  color: hsl(30, 20%, 100%);
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.swal-button--confirm:hover {
-  background-color: hsl(270, 95%, 50%);
-}
-
-.swal-button--cancel {
-  width: fit-content;
-  padding: 7px 15px;
-  border-radius: 6px;
-  font-size: 12px;
-  border: none;
-  background-color: hsl(30, 20%, 100%);
-  color: hsla(270, 95%, 15%, 75%);
-  font-size: 16px;
-  font-weight: 700;
-}
-
 .hidden {
   display: none;
 }
+
