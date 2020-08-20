@@ -158,9 +158,11 @@ export default {
       this.canStart = false
     },
     workTimerSystemNotification() {
-      this.$notification.show("Stop working!", {
-        body: "Your break is just a click away!"
-      }, {})
+      this.$notification.show(
+        "Stop working!", 
+        {body: "Your break is just a click away!"}, 
+        {}
+      )
       this.workTimerPageNotification()
     },
     workTimerPageNotification() {
@@ -246,8 +248,8 @@ export default {
       return boilerFetch(
         url("schedules"), 
         "POST", 
-        {schedule: {name, time_values_attributes: timeValues}
-      })
+        {schedule: {name, time_values_attributes: timeValues}}
+      )
         .then(result => {
           this.getSchedules()
           return result  
