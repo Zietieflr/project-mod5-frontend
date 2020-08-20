@@ -1,33 +1,23 @@
 <template>
   <div id="app">
     <Title message="O'Tock" />
-    <TimerContainer :validToken="validToken" /> 
-    <Login :toggleValidToken="toggleValidToken" :validToken="validToken" />
+    <TimerContainer /> 
   </div>
 </template>
 
 <script>
-import Title from "./components/Title"
-import TimerContainer from "./components/TimerContainer"
-import Login from "./components/Login"
+import Title from './components/Title'
+import TimerContainer from './components/TimerContainer'
 
 export default {
   name: 'App',
   components: {
     Title,
-    TimerContainer,
-    Login
+    TimerContainer
   },
-  data() {
-    return {
-      validToken: false,
-    }
-  },
-  methods: {
-    toggleValidToken() {
-      this.validToken = !this.validToken
-    }
-  }
 }
 </script>
 
+<style>
+
+</style>
