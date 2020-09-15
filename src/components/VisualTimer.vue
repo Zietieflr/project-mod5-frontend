@@ -41,7 +41,7 @@ export default {
     },
     displayTime() {
       const minutes = Math.floor(this.remainingTime/60)
-      const seconds = this.remainingTime%60
+      const seconds = Math.ceil(this.remainingTime%60)
       const minutesString = minutes >= 10 ? `${minutes}` : `0${minutes}`
       const secondsString = seconds >= 10 ? `:${seconds}` : `:0${seconds}`
       return minutesString + secondsString

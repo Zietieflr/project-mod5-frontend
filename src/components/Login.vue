@@ -91,6 +91,7 @@ export default {
   methods: {
     toggleShowSignIn() {
       this.showSignIn = !this.showSignIn
+      this.errorMessage = ""
     },
     toggleSignIn() {
       this.isLogin = !this.isLogin
