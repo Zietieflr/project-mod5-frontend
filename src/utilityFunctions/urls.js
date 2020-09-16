@@ -1,7 +1,7 @@
 const urls = {
-  users: "http://localhost:3000/users/",
-  login: "http://localhost:3000/login/",
-  schedules: "http://localhost:3000/schedules/"
+  users: "https://o-tock.herokuapp.com//users/",
+  login: "https://o-tock.herokuapp.com//login/",
+  schedules: "https://o-tock.herokuapp.com//schedules/"
 }
 
 export default function url(key) {
