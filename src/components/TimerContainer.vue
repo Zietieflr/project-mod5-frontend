@@ -234,7 +234,6 @@ export default {
     },
     saveSchedule(name) {
       name = name ? name : "My Schedule"
-      console.log(name)
       let timeValues = []
       this.completedTimerValues.reverse().forEach(value => {
         timeValues.unshift(value)
